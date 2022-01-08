@@ -1,11 +1,16 @@
 class FriendsController < ApplicationController
+  before_action :authenticate_user!, except: [:index,:show]
   before_action :set_friend, only: [:show, :edit, :update, :destroy]
 
   # GET /friends
   # GET /friends.json
   def index
+   
     @friends = Friend.all
+  
   end
+
+  
 
   # GET /friends/1
   # GET /friends/1.json
@@ -69,6 +74,6 @@ class FriendsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def friend_params
-      params.require(:friend).permit(:first_name, :last_name, :email, :phone, :twitter)
+      params.require(:friend).permit(:first_name, :last_name, :email, :phone, :twitter, :user_id)
     end
 end
